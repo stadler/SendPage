@@ -1,4 +1,3 @@
-
 console.log("Creating SendPage context menu entry...");
 var title = "Send this page..."
 var id = chrome.contextMenus.create({"type": "normal", "title": title, "contexts":["all"], "onclick": sendMail});
@@ -10,7 +9,6 @@ function sendMail(info, tab) {
     var subject = tab.title;
     var body_message = info.pageUrl;
     var mailto_uri = 'mailto:'+email+'?subject='+subject+'&body='+body_message;
-    var mailto_link = "<a href='"+ mailto_uri +"'>Send a Mail!</a>";
     
     win = window.open(mailto_uri, 'emailWindow');
     if (win && win.open && !win.closed) {
