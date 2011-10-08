@@ -10,12 +10,11 @@ function sendMail(info, tab) {
     var subject = tab.title;
     var body_message = info.pageUrl;
     var mailto_uri = 'mailto:'+email+'?subject='+subject+'&body='+body_message;
-    var mailto_link = "<a href='"+ mailto_uri +"'>Send a Mail!</a>";
     
     win = window.open(mailto_uri, 'emailWindow');
     if (win && win.open && !win.closed) {
         console.log("Closing opened window");
-        setTimeout("win.close()",1000);
+        setTimeout("win.close()",200);
         console.log("done!");
     }
     console.log("Page sent!");
