@@ -1,4 +1,3 @@
-
 console.log("Creating SendPage context menu entry...");
 var title = "Send this page..."
 var id = chrome.contextMenus.create({"type": "normal", "title": title, "contexts":["all"], "onclick": sendMail});
