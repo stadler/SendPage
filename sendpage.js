@@ -35,7 +35,7 @@ function getWebmailOption() {
 function getCloseTimeoutOption() {
   var ms_until_close = localStorage["ms_until_close"];
   if (typeof(ms_until_close) == 'undefined' || !ms_until_close) {
-    ms_until_close = 500;
+    ms_until_close = 1000;
   }
   console.log("Closing timeout: " + ms_until_close);
   return ms_until_close;

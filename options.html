@@ -23,7 +23,7 @@
     function reset_options() {
       document.getElementById("input_webmail").checked = false;
       input_webmail_changed();
-      document.getElementById("ms_until_close").value = 500;
+      document.getElementById("ms_until_close").value = 1000;
       ms_until_close_changed();
     }
 
@@ -48,7 +48,7 @@
     function restore_ms_until_close() {
       var ms_until_close = localStorage["ms_until_close"];
       if (!ms_until_close) {
-        ms_until_close = 500;
+        ms_until_close = 1000;
       }
       var range = document.getElementById("ms_until_close");
       range.value = ms_until_close;
@@ -78,9 +78,9 @@
       <input id="input_webmail" type="checkbox" name="Webmail" value="webmail" onchange="input_webmail_changed()"> Is your default mail client a WebMail client (e.g. GMail, Hotmail, ...)? 
     </div>
     <div id="div_close_timeout">
-      In order to open your mail application, not WebMail, an empty web page must be opened. As it is of no use it can be closed shortly after opening. However, if opened to short the Mail application will  not be able to open. So, depending on your mail application you can fine tune this timeout here. The default is 0.5s.
+      In order to open your mail application, not WebMail, an empty web page must be opened. As it is of no use it can be closed shortly after opening. However, if opened to short the Mail application will  not be able to open. So, depending on your mail application you can fine tune this timeout here. The default is 1s.
       <br>
-      <input id="ms_until_close" type="range" min="0" max="5000" value="500" step="100" name="ms_until_close" onchange="ms_until_close_changed()"/>
+      <input id="ms_until_close" type="range" min="0" max="5000" value="1000" step="100" name="ms_until_close" onchange="ms_until_close_changed()"/>
       <label id="output_ms_until_close"/>
     </div>
     <button onclick="save_options()">Save</button>
