@@ -1,0 +1,16 @@
+body {
+  margin-left: 5%;
+  margin-top: 5%;
+  
+  min-width: 320px;
+  max-width: 640px;
+  overflow-x: hidden;
+  font-family: verdana;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+}
+
+div {
+  margin-bottom: 1cm;
+}

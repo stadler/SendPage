@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>Send Page Options</title>
+    <link rel="stylesheet" href="options.css" type="text/css">
+  </head>
+  <script type="text/javascript">
+    // Saves options to localStorage.
+    function save_options() {
+      localStorage["webmail"] = document.getElementById("input_webmail").checked;
+      localStorage["ms_until_close"] = document.getElementById("ms_until_close").value;
+
+      options_saved();
+    }
+    
+    function options_saved() {
+      var status = document.getElementById("status");
+      status.innerHTML = "Options Saved.";
+      setTimeout(function() {
+        status.innerHTML = "";
+      }, 750);
+    }
+    
+    function reset_options() {
+      document.getElementById("input_webmail").checked = false;
+      input_webmail_changed();
+      document.getElementById("ms_until_close").value = 500;
+      ms_until_close_changed();
+    }
+
+    // Restores select box state to saved value from localStorage.
+    function restore_options() {
+      restore_webmail();
+      restore_ms_until_close();
+    }
+    
+    function restore_webmail() {
+      var webmail = localStorage["webmail"];
+      if (typeof(webmail) == 'undefined' || webmail == 'false') {
+        webmail = false;
+      } else {
+        webmail = true;
+      }
+      var checkbox = document.getElementById("input_webmail");
+      checkbox.checked = webmail;
+      input_webmail_changed();
+    }
+    
+    function restore_ms_until_close() {
+      var ms_until_close = localStorage["ms_until_close"];
+      if (!ms_until_close) {
+        ms_until_close = 500;
+      }
+      var range = document.getElementById("ms_until_close");
+      range.value = ms_until_close;
+      ms_until_close_changed();
+    }
+    
+    // Change Handlers
+    function input_webmail_changed() {
+      console.log("input_webmail changed");
+      if (document.getElementById("input_webmail").checked) {
+        document.getElementById("div_close_timeout").style.visibility = 'hidden';
+      } else {
+        document.getElementById("div_close_timeout").style.visibility = 'visible';
+      }
+    }
+    
+    function ms_until_close_changed() {
+      console.log("ms_until_close changed");
+      document.getElementById("output_ms_until_close").innerHTML = (document.getElementById("ms_until_close").value / 1000) + "s";
+    }
+
+  </script>
+
+  <body onload="restore_options()">
+    <h1>SendPage Options</h1>
+    <div id="div_webmail">
+      <input id="input_webmail" type="checkbox" name="Webmail" value="webmail" onchange="input_webmail_changed()"> Is your default mail client a WebMail client (e.g. GMail, Hotmail, ...)? 
+    </div>
+    <div id="div_close_timeout">
+      In order to open your mail application, not WebMail, an empty web page must be opened. As it is of no use it can be closed shortly after opening. However, if opened to short the Mail application will  not be able to open. So, depending on your mail application you can fine tune this timeout here. The default is 0.5s.
+      <br>
+      <input id="ms_until_close" type="range" min="0" max="5000" value="500" step="100" name="ms_until_close" onchange="ms_until_close_changed()"/>
+      <label id="output_ms_until_close"/>
+    </div>
+    <button onclick="save_options()">Save</button>
+    <button onclick="reset_options()">Reset</button>
+    <div id="status"></div>
+  </body>
+</html>
