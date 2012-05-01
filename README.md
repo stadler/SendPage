@@ -2,7 +2,7 @@ SendPage Readme
 ===============
 
 SendPage is a simple chromium extension to send a page to a E-Mail recipient
-with your local or web Mail Client.
+with your default local or web mail client.
 
 Binaries
 --------
@@ -20,6 +20,17 @@ Changelog
  * 1.1 - Proper escaping of ampersands in URLs
  * 1.0 - Small adaptions
  * 0.1 - Initial release
+ 
+Troubleshoot
+------------
+Q: Nothing happens when I click "Send Page..."
+A: For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system.
+
+Q: The Application does not properly work with WebMail (e.g. GMail or Hotmail)
+A: Make sure you enable the WebMail option in the Options of the Extension.
+
+Q: The mail application window still doesn't open, or only at random times.
+A: You can tune the close timeout in the Options of the Extension in order to give your local mail application a little more time to start.
 
 Enjoy!
 
