@@ -2,7 +2,7 @@ SendPage Readme
 ===============
 
 SendPage is a simple chromium extension to send a page to a E-Mail recipient
-with your local Mail Client.
+with your local or web Mail Client.
 
 Binaries
 --------
@@ -16,9 +16,10 @@ https://github.com/Carundi/SendPage
 
 Changelog
 ---------
-Version 1.1 - Proper escaping of ampersands in URLs
-Version 1.0 - Small adaptions
-Version 0.1 - Initial release
+ * 1.2 - Support for Webmail & Options to tune close timeout
+ * 1.1 - Proper escaping of ampersands in URLs
+ * 1.0 - Small adaptions
+ * 0.1 - Initial release
 
 Enjoy!
 
