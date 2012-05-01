@@ -23,19 +23,14 @@ Changelog
  
 Troubleshoot
 ------------
-Q: Nothing happens when I click "Send Page..."
+### Nothing happens when I click "Send Page..."
+For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system.
 
-A: For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system.
+### The Application does not properly work with WebMail (e.g. GMail or Hotmail)
+Make sure you enable the WebMail option in the Options of the Extension.
 
-
-Q: The Application does not properly work with WebMail (e.g. GMail or Hotmail)
-
-A: Make sure you enable the WebMail option in the Options of the Extension.
-
-
-Q: The mail application window still doesn't open, or only at random times.
-
-A: You can tune the close timeout in the Options of the Extension in order to give your local mail application a little more time to start.
+### The mail application window still doesn't open, or only at random times.
+You can tune the close timeout in the Options of the Extension in order to give your local mail application a little more time to start.
 
 Enjoy!
 
