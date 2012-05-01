@@ -24,16 +24,19 @@ function sendMail(info, tab) {
 function getWebmailOption() {
   var isWebmail = localStorage["webmail"];
   if (typeof(isWebmail) == 'undefined' || isWebmail == 'false') {
+    console.log("Webmail disabled.");
     return false;
   } else {
+    console.log("Webmail enabled.");
     return true;
   }  
 }
 
 function getCloseTimeoutOption() {
   var ms_until_close = localStorage["ms_until_close"];
-  if (!ms_until_close) {
-    ms_unitl_close = 500;
+  if (typeof(ms_until_close) == 'undefined' || !ms_until_close) {
+    ms_until_close = 500;
   }
+  console.log("Closing timeout: " + ms_until_close);
   return ms_until_close;
 }
