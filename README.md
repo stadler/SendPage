@@ -16,6 +16,7 @@ https://github.com/Carundi/SendPage
 
 Changelog
 ---------
+ * 1.3 - Make SendPage 'manifest_version' 2 compatible
  * 1.2 - Support for Webmail & Options to tune close timeout
  * 1.1 - Proper escaping of ampersands in URLs
  * 1.0 - Small adaptions

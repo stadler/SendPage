@@ -1,13 +1,20 @@
 {
   "name": "Send Page",
-  "version": "1.2",
+  "version": "1.3",
+  "manifest_version": 2,
+
   "icons": {
     "16": "images/send-page-16.png",
     "48": "images/send-page-48.png",
     "128": "images/send-page-128.png"
   },
   "description": "Allows you to send a link of the current page with your local or web mail application by only a 'Right click -> Send this page...'.",
-  "background_page": "background.html",
+
+  "background": {
+    "scripts": ["sendpage.js"]
+  },
   "options_page": "options.html",
-  "permissions": ["contextMenus"]
+  "permissions": ["contextMenus"],
+  
+  "content_security_policy": "script-src 'self'; object-src 'self'"
 }

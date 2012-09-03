@@ -15,7 +15,7 @@ function sendMail(info, tab) {
   
   if (!getWebmailOption() && win && win.open && !win.closed) {
     console.log("Closing opened window");
-    setTimeout("win.close()",getCloseTimeoutOption());
+    setTimeout(function() {win.close();},getCloseTimeoutOption());
     console.log("done!");
   }
   console.log("Page sent!");
