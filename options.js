@@ -8,12 +8,13 @@
     }
     
     function options_saved() {
-      var status = document.getElementById("status");
-      status.innerHTML = "Options Saved.";
-      setTimeout(function() {
-        status.innerHTML = "";
-      }, 750);
+      document.getElementById("status").innerHTML = "Options Saved.";
+      setTimeout(options_saved_hide, 750);
     }
+
+    function options_saved_hide() {
+        document.getElementById("status").innerHTML = "";
+      }
     
     function reset_options() {
       document.getElementById("input_webmail").checked = false;
@@ -67,13 +68,17 @@
       document.getElementById("output_ms_until_close").innerHTML = (document.getElementById("ms_until_close").value / 1000) + "s";
     }
 
+  function dom_content_loaded() {
+    console.log("Setting Event Listeners...");
+    restore_options();
+    document.querySelector("#input_webmail").onchange = input_webmail_changed;
+    document.querySelector("#ms_until_close").onchange = ms_until_close_changed;
+    document.querySelector("#save_button").onclick = save_options;
+    document.querySelector("#reset_button").onclick = reset_options;
+    console.log("Event Listeners set.");
+  }
+
 // Add event listeners once the DOM has fully loaded by listening for the
 // `DOMContentLoaded` event on the document, and adding your listeners to
 // specific elements when it triggers.
-document.addEventListener('DOMContentLoaded', function () {
-  restore_options();
-  document.querySelector('#input_webmail').addEventListener('onchange', input_webmail_changed);
-  document.querySelector('#ms_until_close').addEventListener('onchange', ms_until_close_changed);
-    document.querySelector('#save_button').addEventListener('onclick', save_options);
-    document.querySelector('#reset_button').addEventListener('onclick', reset_options);
-});
+document.addEventListener('DOMContentLoaded', dom_content_loaded);
