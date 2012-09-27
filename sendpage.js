@@ -6,9 +6,9 @@ console.log("SendPage context menu entry created.");
 function sendMail(info, tab) {
   console.log("Sending Page: " + info.pageUrl);
   var email = "";
-  var subject = tab.title;
+  var subject = escape(tab.title);
   var body_message = escape(info.pageUrl);
-  var mailto_uri = 'mailto:'+email+'?subject='+subject+'&body='+body_message;
+  var mailto_uri = "mailto:"+email+"?subject="+subject+"&body="+body_message;
   console.log("The MailTo URI=\n'" + mailto_uri +"'")
   
   win = window.open(mailto_uri, '_blank');
