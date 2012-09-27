@@ -12,11 +12,11 @@ https://chrome.google.com/webstore/detail/higemadklcnjhjpgcbnnbpgeeippjjcp
 Sources
 -------
 Download Sources from GitHub:
-https://github.com/Carundi/SendPage
+https://github.com/stadler/SendPage
 
 Changelog
 ---------
- * 1.3 - Make SendPage 'manifest_version' 2 compatible
+ * 1.3 - Make SendPage 'manifest_version' 2 compatible and proper title escaping
  * 1.2 - Support for Webmail & Options to tune close timeout
  * 1.1 - Proper escaping of ampersands in URLs
  * 1.0 - Small adaptions
