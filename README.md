@@ -16,6 +16,7 @@ https://github.com/stadler/SendPage
 
 Changelog
 ---------
+ * 1.4 - Made sure that the subject has the correct encoding
  * 1.3 - Make SendPage 'manifest_version' 2 compatible and proper title escaping
  * 1.2 - Support for Webmail & Options to tune close timeout
  * 1.1 - Proper escaping of ampersands in URLs

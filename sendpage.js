@@ -6,7 +6,7 @@ console.log("SendPage context menu entry created.");
 function sendMail(info, tab) {
   console.log("Sending Page: " + info.pageUrl);
   var email = "";
-  var subject = escape(tab.title);
+  var subject = mimeWordEncode(tab.title);
   var body_message = escape(info.pageUrl);
   var mailto_uri = "mailto:"+email+"?subject="+subject+"&body="+body_message;
   console.log("The MailTo URI=\n'" + mailto_uri +"'")
@@ -19,6 +19,12 @@ function sendMail(info, tab) {
     console.log("done!");
   }
   console.log("Page sent!");
+}
+
+function mimeWordEncode(string) {
+  // =? charset ? Q or B ? string ?=
+  var docCharSet = document.defaultCharset;
+  return "=?"+ docCharSet +"?Q?" + escape(string) + "?=";
 }
 
 function getWebmailOption() {
