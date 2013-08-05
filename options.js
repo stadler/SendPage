@@ -3,6 +3,7 @@
       console.log("Saving options...");
       localStorage["webmail"] = document.getElementById("input_webmail").checked;
       localStorage["ms_until_close"] = document.getElementById("ms_until_close").value;
+      localStorage["wordEncoding"] = document.getElementById("input_encoding").checked;
 
       options_saved();
     }
@@ -18,6 +19,7 @@
     
     function reset_options() {
       document.getElementById("input_webmail").checked = false;
+      document.getElementById("input_encoding").checked = false;
       input_webmail_changed();
       document.getElementById(	"ms_until_close").value = 1000;
       ms_until_close_changed();
@@ -25,8 +27,22 @@
 
     // Restores select box state to saved value from localStorage.
     function restore_options() {
+      restore_encoding();
       restore_webmail();
       restore_ms_until_close();
+    }
+    
+    function restore_encoding() {
+      console.log("restoring encoding option");
+      var wordEncoding = localStorage["wordEncoding"];
+      if (typeof(wordEncoding) == 'undefined' || wordEncoding == 'false') {
+        wordEncoding = false;
+      } else {
+        wordEncoding = true;
+      }
+      var checkbox = document.getElementById("input_encoding");
+      checkbox.checked = wordEncoding;
+      input_encoding_changed();
     }
     
     function restore_webmail() {
@@ -63,6 +79,10 @@
       }
     }
     
+    function input_encoding_changed() {
+      console.log("input_encoding changed");
+    }
+    
     function ms_until_close_changed() {
       console.log("ms_until_close changed");
       document.getElementById("output_ms_until_close").innerHTML = (document.getElementById("ms_until_close").value / 1000) + "s";
@@ -71,6 +91,7 @@
   function dom_content_loaded() {
     console.log("Setting Event Listeners...");
     restore_options();
+    document.querySelector("#input_encoding").onchange = input_encoding_changed;
     document.querySelector("#input_webmail").onchange = input_webmail_changed;
     document.querySelector("#ms_until_close").onchange = ms_until_close_changed;
     document.querySelector("#save_button").onclick = save_options;

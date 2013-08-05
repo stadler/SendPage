@@ -22,9 +22,25 @@ function sendMail(info, tab) {
 }
 
 function mimeWordEncode(string) {
-  // =? charset ? Q or B ? string ?=
-  var docCharSet = document.defaultCharset;
-  return "=?"+ docCharSet +"?Q?" + escape(string) + "?=";
+  var escapedString = escape(string);
+  var isWordEncoded = getEncodingOption();
+  if (isWordEncoded) {
+    // =? charset ? Q or B ? string ?=
+    var docCharSet = document.defaultCharset;
+    return "=?"+ docCharSet +"?Q?" + escapedString + "?=";
+  }
+  return escapedString;
+}
+
+function getEncodingOption() {
+  var isWordEncoded = localStorage["wordEncoding"];
+  if (typeof(isWordEncoded) == 'undefined' || isWordEncoded == 'false') {
+    console.log("WordEncoding disabled.");
+    return false;
+  } else {
+    console.log("WordEncoding enabled.");
+    return true;
+  }  
 }
 
 function getWebmailOption() {
