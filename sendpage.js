@@ -4,11 +4,16 @@ var id = chrome.contextMenus.create({"type": "normal", "title": title, "contexts
 console.log("SendPage context menu entry created.");
 
 function sendMail(info, tab) {
-  console.log("Sending Page: " + info.pageUrl);
   var email = "";
   var subject = mimeWordEncode(tab.title);
-  var body_message = escape(info.pageUrl);
-  var mailto_uri = "mailto:"+email+"?subject="+subject+"&body="+body_message;
+  var body_message;
+  if (info.pageUrl.startsWith("chrome-extension://"))  {
+	  body_message = info.srcUrl;
+  } else {
+	  body_message = info.pageUrl;
+  }
+  console.log("Sending Page: " + body_message);
+  var mailto_uri = "mailto:"+email+"?subject="+subject+"&body="+escape(body_message);
   console.log("The MailTo URI=\n'" + mailto_uri +"'")
   
   win = window.open(mailto_uri, '_blank');
