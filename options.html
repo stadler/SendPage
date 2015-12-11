@@ -7,20 +7,10 @@
 
   <body>
     <h1>SendPage Options</h1>
-    <div id="div_webmail">
-      <input id="input_webmail" type="checkbox" name="Webmail" value="webmail">
-      Is your default mail client a WebMail client (e.g. GMail, Hotmail, ...)? 
-    </div>
     <div id="div_encoding">
       <input id="input_encoding" type="checkbox" name="Encoding" value="wordEncoding">
         Depending on your EMail Client things might not be properly encoded as some do not support Word Encoding.
         For details please see: https://en.wikipedia.org/wiki/MIME#Encoded-Word
-    </div>
-    <div id="div_close_timeout">
-      In order to open your mail application, not WebMail, an empty web page must be opened. As it is of no use it can be closed shortly after opening. However, if opened to short the Mail application will  not be able to open. So, depending on your mail application you can fine tune this timeout here. The default is 1s.
-      <br>
-      <input id="ms_until_close" type="range" min="0" max="5000" value="1000" step="100" name="ms_until_close"/>
-      <label id="output_ms_until_close"/>
     </div>
     <button id="save_button">Save</button>
     <button id="reset_button">Reset</button>
