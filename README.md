@@ -31,7 +31,7 @@ Changelog
  * 1.7
    * Fix encoding issue in mail subject
    * Allow to send the url of links, images and videos
-   * Remove explicit WebMail and close timoout option and reuse current window to open link
+   * Removed options page
  * 1.6 - Show the correct URL for PDFs that are opened in the built in pdf viewer 
  * 1.5 - Added option to disable word encoding of subject for low quality mail clients that don't support it (e.g. outlook)
  * 1.4 - Made sure that the subject has the correct encoding

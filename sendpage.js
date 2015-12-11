@@ -42,29 +42,12 @@ function encodeBody(string) {
 }
 
 function mimeWordEncode(string) {
-  if (getEncodingOption()) {
-    // Tab title should always be utf-8
-    var docCharSet = 'utf-8';
-    // =? charset ? Q (like quoted-printable) or B (base64) ? encoded string ?=
-    return "=?"+ docCharSet +"?B?" + utf8_to_base64(string) + "?=";
-
-  } else {
-    // Needs to be encoded anyway because we put it into a mailto uri
-    return encodeURIComponent(string);
-  }
+  // Tab title should always be utf-8
+  var docCharSet = 'utf-8';
+  // =? charset ? Q (like quoted-printable) or B (base64) ? encoded string ?=
+  return "=?"+ docCharSet +"?B?" + utf8_to_base64(string) + "?=";
 }
 
 function utf8_to_base64(str) {
   return window.btoa(decodeURIComponent(encodeURIComponent(str)));
-}
-
-function getEncodingOption() {
-  var isWordEncoded = localStorage["wordEncoding"];
-  if (typeof(isWordEncoded) == 'undefined' || isWordEncoded == 'false') {
-    console.log("WordEncoding disabled.");
-    return false;
-  } else {
-    console.log("WordEncoding enabled.");
-    return true;
-  }  
 }
