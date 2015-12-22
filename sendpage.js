@@ -7,11 +7,11 @@ var id = chrome.contextMenus.create({"type": "normal", "title": "Send this page.
 console.log("SendPage context menu entry created.");
 
 function sendMail(info, tab) {
-  var subject = mimeWordEncode(tab.title);
+  var subject = encodeURIComponent(tab.title);
   console.log("Sending Mail with Subject: " + subject);
 
   var body_message = determineUrlOfClickedElement(info);
-  var body = encodeBody(body_message)
+  var body = encodeURIComponent(body_message)
   console.log("Sending Mail with Body: " + body);
 
   var mailto_uri = "mailto:?subject=" + subject + "&body=" + body;
@@ -35,19 +35,4 @@ function determineUrlOfClickedElement(info) {
     // Normally send the url of the page
    return info.pageUrl;
   }
-}
-
-function encodeBody(string) {
-  return encodeURIComponent(string)
-}
-
-function mimeWordEncode(string) {
-  // Tab title should always be utf-8
-  var docCharSet = 'utf-8';
-  // =? charset ? Q (like quoted-printable) or B (base64) ? encoded string ?=
-  return "=?"+ docCharSet +"?B?" + utf8_to_base64(string) + "?=";
-}
-
-function utf8_to_base64(str) {
-  return window.btoa(decodeURIComponent(encodeURIComponent(str)));
 }

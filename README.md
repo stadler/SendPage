@@ -28,6 +28,7 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
+ * 1.8 - Replaced word encoding by default encodeURIComponent and use document encoding for subject line
  * 1.7
    * Fix encoding issue in mail subject
    * Allow to send the url of links, images and videos
