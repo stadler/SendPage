@@ -3,22 +3,51 @@
  */
 
 console.log("Creating SendPage context menu entry...");
-var id = chrome.contextMenus.create({"type": "normal", "title": "Send this page...", "contexts":["all"], "onclick": sendMail});
+var id = chrome.contextMenus.create({"type": "normal", "title": "Send this page...", "contexts":["all"], "onclick": fetchOptions});
 console.log("SendPage context menu entry created.");
 
-function sendMail(info, tab) {
+function fetchOptions(info, tab) {
+  chrome.storage.sync.get(['bodyPrefix', 'bodyPostfix', 'mailClientType'], function(options) {
+    sendMail(info, tab, options);
+  });
+}
+
+function sendMail(info, tab, options) {
+  var bodyPrefix = options.bodyPrefix;
+  var bodyPostfix = options.bodyPostfix;
+  var mailClientType = options.mailClientType;
   var subject = encodeURIComponent(tab.title);
   console.log("Sending Mail with Subject: " + subject);
 
-  var body_message = determineUrlOfClickedElement(info);
-  var body = encodeURIComponent(body_message)
+  var urlToSend = determineUrlOfClickedElement(info);
+  var body = encodeURIComponent(bodyPrefix + urlToSend + bodyPostfix);
   console.log("Sending Mail with Body: " + body);
 
-  var mailto_uri = "mailto:?subject=" + subject + "&body=" + body;
-  console.log("The MailTo URI=\n'" + mailto_uri +"'")
+  var mailToUrl = "mailto:?subject=" + subject + "&body=" + body;
+  console.log("The MailTo URL=\n'" + mailToUrl +"'");
 
-  chrome.tabs.update(null, {url: mailto_uri});
-  console.log("Mail created!");
+  if (mailClientType === 'local') {
+    // Only create new tab to close it after mailto handler opened
+    chrome.tabs.create({url: mailToUrl, active: false}, tabCreatedAndCloseCallback);
+  } else {
+    // Keep tab opened
+    chrome.tabs.create({url: mailToUrl, active: true}, tabCreatedCallback);
+  }
+}
+
+function tabCreatedCallback(tab) {
+  console.log("New WebMail Tab created...");
+}
+
+function tabCreatedAndCloseCallback(tab) {
+  var timeoutInMs = 500;
+  console.log("New Tab created and will be closed again in " + timeoutInMs + "ms ...");
+  setTimeout(
+    function() {
+      console.log("Closing new tab again...")
+      chrome.tabs.remove(tab.id);
+    },
+    timeoutInMs);
 }
 
 function determineUrlOfClickedElement(info) {

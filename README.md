@@ -28,6 +28,10 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
+ * 2.0
+   * Replace usage of tab.update by tab.create as tabs cannot be properly updated anymore.
+   * Reintroduced options page
+   * Allow to define Mail text
  * 1.8 - Replaced word encoding by default encodeURIComponent and use document encoding for subject line
  * 1.7
    * Fix encoding issue in mail subject

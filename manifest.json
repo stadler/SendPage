@@ -1,6 +1,6 @@
 {
   "name": "Send Page",
-  "version": "1.8",
+  "version": "2.0",
   "manifest_version": 2,
 
   "icons": {
@@ -10,8 +10,13 @@
   },
   "description": "Allows you to easily send the url of a page, link, image or video per mail.",
 
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
   "background": {
     "scripts": ["sendpage.js"]
   },
-  "permissions": ["contextMenus"]
+  "permissions": ["contextMenus", "tabs", "storage"]
 }
