@@ -21,14 +21,14 @@ function restore_options() {
   chrome.storage.sync.get(
     {
       // defaults
-      mailClientType: 'local',
+      mailClientType: 'web',
       bodyPrefix: '',
       bodyPostfix: ''
     },
     function(items) {
       document.getElementById('mailClientType').value = items.mailClientType;
-      document.getElementById('bodyPrefix').text = items.bodyPrefix;
-      document.getElementById('bodyPostfix').text = items.bodyPostfix;
+      document.getElementById('bodyPrefix').value = items.bodyPrefix;
+      document.getElementById('bodyPostfix').value = items.bodyPostfix;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

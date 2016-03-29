@@ -20,7 +20,7 @@ function sendMail(info, tab, options) {
   console.log("Sending Mail with Subject: " + subject);
 
   var urlToSend = determineUrlOfClickedElement(info);
-  var body = encodeURIComponent(bodyPrefix + urlToSend + bodyPostfix);
+  var body = encodeURIComponent(bodyPrefix + "\n" + urlToSend + "\n" + bodyPostfix);
   console.log("Sending Mail with Body: " + body);
 
   var mailToUrl = "mailto:?subject=" + subject + "&body=" + body;

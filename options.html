@@ -15,14 +15,14 @@
     <div>
       <h2>Mail Client Type</h2>
       What type of mail client do you use?
+      If you are using a web mail client the tab will be kept open for the web mail client.
       If you are using a local application, which is registered to handle mailto links, a new tab will quickly appear
-      and disappear again to start this application.
-      If you are using a web mail client the tab will be kept open for the web mail client.<br/>
+      and disappear again after having opened the mail client. <br/>
       <select id="mailClientType">
-        <!-- We close the created tab again -->
-        <option value="local">Local Mail Client</option>
-        <!-- We keep the created tab -->
+        <!-- Keep the created tab open (Default) -->
         <option value="web">Web Mail Client</option>
+        <!-- Close the created tab after opening mail client-->
+        <option value="local">Local Mail Client</option>
       </select>
     </div>
 
@@ -39,13 +39,6 @@
         <textarea rows="4" cols="80" id="bodyPostfix"></textarea>
       </p>
     </div>
-
-    <div>
-      <h2>Troubleshoot</h2>
-      If you experience problems opening mails make sure you have an application registered to handle mailto links.
-      If such an application is registered it should allow you to write a mail by clicking this <a href="mailto:text@examplecom">mailto link</a>
-    </div>
-
 
     <div id="status"></div>
 
