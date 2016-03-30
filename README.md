@@ -32,6 +32,7 @@ Changelog
    * Remove unused 'tabs' permission
    * Make sure that we never have undefined appear in the message body
    * Open the options page after install
+   * If sending a link, use the text of the link as subject instead of the title of the page that is containing the link.
  * 2.0
    * Replace usage of tab.update by tab.create as tabs cannot be properly updated anymore.
    * Reintroduced options page
