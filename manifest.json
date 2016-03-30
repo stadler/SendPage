@@ -20,5 +20,5 @@
   "background": {
     "scripts": ["sendpage.js"]
   },
-  "permissions": ["contextMenus", "tabs", "storage"]
+  "permissions": ["contextMenus", "storage"]
 }

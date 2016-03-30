@@ -28,6 +28,10 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
+ * 2.1
+   * Remove unused 'tabs' permission
+   * Make sure that we never have undefined appear in the message body
+   * Open the options page after install
  * 2.0
    * Replace usage of tab.update by tab.create as tabs cannot be properly updated anymore.
    * Reintroduced options page

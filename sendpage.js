@@ -2,9 +2,23 @@
  * Registers a context menu entry that upon click, opens a mailto uri containing page title and url of the given context.
  */
 
+firstTimeOptionsPopup();
 console.log("Creating SendPage context menu entry...");
 var id = chrome.contextMenus.create({"type": "normal", "title": "Send this page...", "contexts":["all"], "onclick": fetchOptions});
 console.log("SendPage context menu entry created.");
+
+
+function firstTimeOptionsPopup() {
+  if (localStorage.getItem('wasAlreadyStarted')) {
+    return;
+  }
+  localStorage.setItem('wasAlreadyStarted', true);
+  chrome.runtime.openOptionsPage(optionsPageOpened);
+}
+
+function optionsPageOpened() {
+  console.log("Options page opened...")
+}
 
 function fetchOptions(info, tab) {
   chrome.storage.sync.get(['bodyPrefix', 'bodyPostfix', 'mailClientType'], function(options) {
@@ -13,26 +27,29 @@ function fetchOptions(info, tab) {
 }
 
 function sendMail(info, tab, options) {
-  var bodyPrefix = options.bodyPrefix;
-  var bodyPostfix = options.bodyPostfix;
-  var mailClientType = options.mailClientType;
   var subject = encodeURIComponent(tab.title);
   console.log("Sending Mail with Subject: " + subject);
 
   var urlToSend = determineUrlOfClickedElement(info);
-  var body = encodeURIComponent(bodyPrefix + "\n" + urlToSend + "\n" + bodyPostfix);
+  var bodyPrefix = safeGetOptionWithNewline(options.bodyPrefix);
+  var bodyPostfix = safeGetOptionWithNewline(options.bodyPostfix);
+  var body = encodeURIComponent(bodyPrefix + urlToSend + bodyPostfix);
   console.log("Sending Mail with Body: " + body);
 
   var mailToUrl = "mailto:?subject=" + subject + "&body=" + body;
   console.log("The MailTo URL=\n'" + mailToUrl +"'");
 
-  if (mailClientType === 'local') {
+  if (options.mailClientType === 'local') {
     // Only create new tab to close it after mailto handler opened
     chrome.tabs.create({url: mailToUrl, active: false}, tabCreatedAndCloseCallback);
   } else {
     // Keep tab opened
     chrome.tabs.create({url: mailToUrl, active: true}, tabCreatedCallback);
   }
+}
+
+function safeGetOptionWithNewline(option) {
+  return (typeof option !== 'undefined') ? option + "\n" : "";
 }
 
 function tabCreatedCallback(tab) {

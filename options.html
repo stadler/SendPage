@@ -14,16 +14,18 @@
 
     <div>
       <h2>Mail Client Type</h2>
-      What type of mail client do you use?
-      If you are using a web mail client the tab will be kept open for the web mail client.
-      If you are using a local application, which is registered to handle mailto links, a new tab will quickly appear
-      and disappear again after having opened the mail client. <br/>
-      <select id="mailClientType">
-        <!-- Keep the created tab open (Default) -->
-        <option value="web">Web Mail Client</option>
-        <!-- Close the created tab after opening mail client-->
-        <option value="local">Local Mail Client</option>
-      </select>
+      What type of mail client do you use?<br/>
+      If you are using a web mail client the tab will be kept open for the web mail client.<br/>
+      If you are using a local mail client, which is registered to handle mailto links, a new tab will quickly appear
+      and disappear again after having opened the mail client.
+      <p>
+        <select id="mailClientType">
+          <!-- Keep the created tab open (Default) -->
+          <option value="web">Web Mail Client</option>
+          <!-- Close the created tab after opening mail client-->
+          <option value="local">Local Mail Client</option>
+        </select>
+      </p>
     </div>
 
     <div>
@@ -32,9 +34,7 @@
       But if you want you may define text that will appear before and after the url.
       <p>
         With what text should Mails start:<br/>
-        <textarea rows="4" cols="80" id="bodyPrefix"></textarea>
-      </p>
-      <p>
+        <textarea rows="4" cols="80" id="bodyPrefix"></textarea><br/>
         With what text should Mails end:<br/>
         <textarea rows="4" cols="80" id="bodyPostfix"></textarea>
       </p>
