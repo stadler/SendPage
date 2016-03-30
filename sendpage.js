@@ -27,13 +27,14 @@ function fetchOptions(info, tab) {
 }
 
 function sendMail(info, tab, options) {
-  var subject = encodeURIComponent(tab.title);
+  var subjectAndUrl = determineSubjectAndUrl(info, tab);
+
+  var subject = encodeURIComponent(subjectAndUrl.subject);
   console.log("Sending Mail with Subject: " + subject);
 
-  var urlToSend = determineUrlOfClickedElement(info);
   var bodyPrefix = safeGetOptionWithNewline(options.bodyPrefix);
   var bodyPostfix = safeGetOptionWithNewline(options.bodyPostfix);
-  var body = encodeURIComponent(bodyPrefix + urlToSend + bodyPostfix);
+  var body = encodeURIComponent(bodyPrefix + subjectAndUrl.url + bodyPostfix);
   console.log("Sending Mail with Body: " + body);
 
   var mailToUrl = "mailto:?subject=" + subject + "&body=" + body;
@@ -67,18 +68,24 @@ function tabCreatedAndCloseCallback(tab) {
     timeoutInMs);
 }
 
-function determineUrlOfClickedElement(info) {
+function determineSubjectAndUrl(info, tab) {
+  var result = {subject:'', url:''};
   if (typeof info.linkUrl != "undefined") {
     // Use the link url if the user clicked a link
-    return info.linkUrl;
+    result.subject = info.selectionText;
+    result.url = info.linkUrl;
   } else if (typeof info.srcUrl != "undefined") {
     // For Images or other stuff containing src attributes
-   return info.srcUrl;
+    result.subject = tab.title;
+    result.url = info.info.srcUrl;
   } else if (info.pageUrl.startsWith("chrome-extension://"))  {
     // For PDFs and other extensions there is no pageUrl so the srcUrl is better suited
-    return info.srcUrl;
+    result.subject = tab.title;
+    result.url = info.info.srcUrl;
   } else {
     // Normally send the url of the page
-   return info.pageUrl;
+    result.subject = tab.title;
+    result.url = info.info.pageUrl;
   }
+  return result;
 }
