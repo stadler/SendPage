@@ -50,7 +50,7 @@ function sendMail(info, tab, options) {
 }
 
 function safeGetOptionWithNewline(option) {
-  return (typeof option !== 'undefined') ? option + "\n" : "";
+  return (typeof option !== 'undefined' && option.length != 0) ? option + "\n" : "";
 }
 
 function tabCreatedCallback(tab) {
@@ -77,15 +77,15 @@ function determineSubjectAndUrl(info, tab) {
   } else if (typeof info.srcUrl != "undefined") {
     // For Images or other stuff containing src attributes
     result.subject = tab.title;
-    result.url = info.info.srcUrl;
+    result.url = info.srcUrl;
   } else if (info.pageUrl.startsWith("chrome-extension://"))  {
     // For PDFs and other extensions there is no pageUrl so the srcUrl is better suited
     result.subject = tab.title;
-    result.url = info.info.srcUrl;
+    result.url = info.srcUrl;
   } else {
     // Normally send the url of the page
     result.subject = tab.title;
-    result.url = info.info.pageUrl;
+    result.url = info.pageUrl;
   }
   return result;
 }
