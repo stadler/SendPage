@@ -78,7 +78,7 @@ function determineSubjectAndUrl(info, tab) {
     // For Images or other stuff containing src attributes
     result.subject = tab.title;
     result.url = info.srcUrl;
-  } else if (info.pageUrl.startsWith("chrome-extension://"))  {
+  } else if (variableExists(info.pageUrl) && info.pageUrl.startsWith("chrome-extension://"))  {
     // For PDFs and other extensions there is no pageUrl so the srcUrl is better suited
     result.subject = tab.title;
     result.url = info.srcUrl;

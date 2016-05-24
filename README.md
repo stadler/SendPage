@@ -28,7 +28,9 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
- * 2.2 - Fixed #14: email end text appended to URI
+ * 2.2
+   * Fixed #14: email end text appended to URI
+   * Fixed type error
  * 2.1
    * Remove unused 'tabs' permission
    * Make sure that we never have undefined appear in the message body
