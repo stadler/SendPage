@@ -50,7 +50,7 @@ function sendMail(info, tab, options) {
 }
 
 function safeGetOptionWithNewline(prefix, option, postfix) {
-  return (typeof option !== 'undefined' && option.length != 0) ? prefix + option + postfix : "";
+  return (variableExists(option) && option.length != 0) ? prefix + option + postfix : "";
 }
 
 function tabCreatedCallback(tab) {
@@ -70,11 +70,11 @@ function tabCreatedAndCloseCallback(tab) {
 
 function determineSubjectAndUrl(info, tab) {
   var result = {subject:'', url:''};
-  if (typeof info.linkUrl != "undefined") {
+  if (variableExists(info.linkUrl)) {
     // Use the link url if the user clicked a link
-    result.subject = info.selectionText;
+    result.subject = variableExists(info.selectionText) ? info.selectionText : tab.title;
     result.url = info.linkUrl;
-  } else if (typeof info.srcUrl != "undefined") {
+  } else if (variableExists(info.srcUrl)) {
     // For Images or other stuff containing src attributes
     result.subject = tab.title;
     result.url = info.srcUrl;
@@ -88,4 +88,8 @@ function determineSubjectAndUrl(info, tab) {
     result.url = info.pageUrl;
   }
   return result;
+}
+
+function variableExists(myVar) {
+  return typeof myVar !== "undefined";
 }
