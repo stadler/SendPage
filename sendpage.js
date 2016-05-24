@@ -32,8 +32,8 @@ function sendMail(info, tab, options) {
   var subject = encodeURIComponent(subjectAndUrl.subject);
   console.log("Sending Mail with Subject: " + subject);
 
-  var bodyPrefix = safeGetOptionWithNewline(options.bodyPrefix);
-  var bodyPostfix = safeGetOptionWithNewline(options.bodyPostfix);
+  var bodyPrefix = safeGetOptionWithNewline("", options.bodyPrefix, "\n");
+  var bodyPostfix = safeGetOptionWithNewline("\n", options.bodyPostfix, "");
   var body = encodeURIComponent(bodyPrefix + subjectAndUrl.url + bodyPostfix);
   console.log("Sending Mail with Body: " + body);
 
@@ -49,8 +49,8 @@ function sendMail(info, tab, options) {
   }
 }
 
-function safeGetOptionWithNewline(option) {
-  return (typeof option !== 'undefined' && option.length != 0) ? option + "\n" : "";
+function safeGetOptionWithNewline(prefix, option, postfix) {
+  return (typeof option !== 'undefined' && option.length != 0) ? prefix + option + postfix : "";
 }
 
 function tabCreatedCallback(tab) {
