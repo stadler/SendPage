@@ -70,6 +70,7 @@ function tabCreatedAndCloseCallback(tab) {
 
 function determineSubjectAndUrl(info, tab) {
   var result = {subject:'', url:''};
+  console.log("Determine Subject and URI. info: " + JSON.stringify(info) + ", tab: " + JSON.stringify(tab));
   if (variableExists(info.linkUrl)) {
     // Use the link url if the user clicked a link
     result.subject = variableExists(info.selectionText) ? info.selectionText : tab.title;
@@ -82,10 +83,14 @@ function determineSubjectAndUrl(info, tab) {
     // For PDFs and other extensions there is no pageUrl so the srcUrl is better suited
     result.subject = tab.title;
     result.url = info.srcUrl;
+  } else if (variableExists(info.pageUrl)) {
+    // Use page url if possible
+    result.subject = tab.title;
+    result.url = info.pageUrl;
   } else {
     // Normally send the url of the page
     result.subject = tab.title;
-    result.url = info.pageUrl;
+    result.url = tab.url;
   }
   return result;
 }

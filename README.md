@@ -1,5 +1,5 @@
-SendPage Readme
-===============
+SendPage
+========
 
 SendPage is a simple chromium extension to send a page to a E-Mail recipient
 with your default local or web mail client.
@@ -28,6 +28,9 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
+ * 2.3
+   * Fixed #15: URI is is undefined when using button beside url
+   * Provide better log output for debugging
  * 2.2
    * Fixed #14: email end text appended to URI
    * Fixed type error
