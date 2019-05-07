@@ -60,7 +60,8 @@ Changelog
 Troubleshoot
 ------------
 ### Nothing happens when I click "Send Page..."
-For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system.
+For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system. If this is the case you should be able to click on the following Link to open your Mail client:
+mailto:test@example.com?subject=The%20Subject&body=The%20Body
 
 ### It still does not do what I expect. What can I do?
 On the chrome extensions page (chrome://extensions/) you can enable the developer mode and open the background page.
