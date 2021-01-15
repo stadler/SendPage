@@ -11,6 +11,9 @@ Binaries
 Download Binaries from Chrome Web Store:
 https://chrome.google.com/webstore/detail/higemadklcnjhjpgcbnnbpgeeippjjcp
 
+Or the Microsoft Edge-Add-Ons Store:
+https://microsoftedge.microsoft.com/addons/detail/send-page/akohgmamjjpdagmohoecbmgiejkplkfb
+
 Sources
 -------
 Download Sources from GitHub:
