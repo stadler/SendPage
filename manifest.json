@@ -1,7 +1,7 @@
 {
   "name": "Send Page",
   "description": "Allows you to easily send the url of a page, link, image or video per mail.",
-  "version": "2.3",
+  "version": "3.0",
   "manifest_version": 3,
   "author": "Jacques Stadler",
   "homepage_url": "https://github.com/stadler/SendPage",
