@@ -4,16 +4,20 @@
 
 firstTimeOptionsPopup();
 console.log("Creating SendPage context menu entry...");
-var id = chrome.contextMenus.create({"type": "normal", "title": "Send this page...", "contexts":["all"], "onclick": fetchOptions});
+var id = chrome.contextMenus.create({ "id": "send-page-context-menu", "type": "normal", "title": "Send this page...", "contexts": ["all"]});
+chrome.contextMenus.onClicked.addListener(fetchOptions);
 console.log("SendPage context menu entry created.");
 
 
 function firstTimeOptionsPopup() {
-  if (localStorage.getItem('wasAlreadyStarted')) {
-    return;
-  }
-  localStorage.setItem('wasAlreadyStarted', true);
-  chrome.runtime.openOptionsPage(optionsPageOpened);
+  chrome.storage.local.get(['wasAlreadyStarted']).then(wasStarted => {
+    if (wasStarted) {
+      return;
+    } else {
+      chrome.storage.local.set({'wasAlreadyStarted': true});
+      chrome.runtime.openOptionsPage(optionsPageOpened);
+    }
+  });
 }
 
 function optionsPageOpened() {
@@ -21,7 +25,7 @@ function optionsPageOpened() {
 }
 
 function fetchOptions(info, tab) {
-  chrome.storage.sync.get(['bodyPrefix', 'bodyPostfix', 'mailClientType'], function(options) {
+  chrome.storage.sync.get(['bodyPrefix', 'bodyPostfix', 'mailClientType'], function (options) {
     sendMail(info, tab, options);
   });
 }
@@ -38,14 +42,14 @@ function sendMail(info, tab, options) {
   console.log("Sending Mail with Body: " + body);
 
   var mailToUrl = "mailto:?subject=" + subject + "&body=" + body;
-  console.log("The MailTo URL=\n'" + mailToUrl +"'");
+  console.log("The MailTo URL=\n'" + mailToUrl + "'");
 
   if (options.mailClientType === 'local') {
     // Only create new tab to close it after mailto handler opened
-    chrome.tabs.create({url: mailToUrl, active: false}, tabCreatedAndCloseCallback);
+    chrome.tabs.create({ url: mailToUrl, active: false }, tabCreatedAndCloseCallback);
   } else {
     // Keep tab opened
-    chrome.tabs.create({url: mailToUrl, active: true}, tabCreatedCallback);
+    chrome.tabs.create({ url: mailToUrl, active: true }, tabCreatedCallback);
   }
 }
 
@@ -61,7 +65,7 @@ function tabCreatedAndCloseCallback(tab) {
   var timeoutInMs = 500;
   console.log("New Tab created and will be closed again in " + timeoutInMs + "ms ...");
   setTimeout(
-    function() {
+    function () {
       console.log("Closing new tab again...")
       chrome.tabs.remove(tab.id);
     },
@@ -69,7 +73,7 @@ function tabCreatedAndCloseCallback(tab) {
 }
 
 function determineSubjectAndUrl(info, tab) {
-  var result = {subject:'', url:''};
+  var result = { subject: '', url: '' };
   console.log("Determine Subject and URI. info: " + JSON.stringify(info) + ", tab: " + JSON.stringify(tab));
   if (variableExists(info.linkUrl)) {
     // Use the link url if the user clicked a link
@@ -79,7 +83,7 @@ function determineSubjectAndUrl(info, tab) {
     // For Images or other stuff containing src attributes
     result.subject = tab.title;
     result.url = info.srcUrl;
-  } else if (variableExists(info.pageUrl) && info.pageUrl.startsWith("chrome-extension://"))  {
+  } else if (variableExists(info.pageUrl) && info.pageUrl.startsWith("chrome-extension://")) {
     // For PDFs and other extensions there is no pageUrl so the srcUrl is better suited
     result.subject = tab.title;
     result.url = info.srcUrl;

@@ -2,7 +2,7 @@
   "name": "Send Page",
   "description": "Allows you to easily send the url of a page, link, image or video per mail.",
   "version": "2.3",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "author": "Jacques Stadler",
   "homepage_url": "https://github.com/stadler/SendPage",
 
@@ -13,12 +13,11 @@
   },
 
   "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
+    "page": "options.html"
   },
 
   "background": {
-    "scripts": ["sendpage.js"]
+    "service_worker": "sendpage.js"
   },
   "permissions": ["contextMenus", "storage"]
 }
