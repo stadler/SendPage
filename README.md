@@ -8,7 +8,7 @@ It will actually just open a mailto URI so you need to have a (local or web) E-M
 
 Binaries
 --------
-Download Binaries from Chrome Web Store:
+Download Binaries from Chrome Web Store (also for Brave, and other Chromium based Browsers):
 https://chrome.google.com/webstore/detail/higemadklcnjhjpgcbnnbpgeeippjjcp
 
 Or the Microsoft Edge-Add-Ons Store:
@@ -31,6 +31,11 @@ Please give this Project a Star on GitHub if you like it.
 
 Changelog
 ---------
+
+ * 3.0
+   * Upgrade to manifest version 3
+   * Add terms of use
+   * Make it clear that also Brave and other Chromium based browsers are supported.
  * 2.3
    * Fixed #15: URI is is undefined when using button beside url
    * Provide better log output for debugging
@@ -64,6 +69,10 @@ Troubleshoot
 ------------
 ### Nothing happens when I click "Send Page..."
 For the extension to work a default mail application ("mailto:" protocol handler) must be registered on your system. If this is the case you should be able to click on [this Link](mailto:test@example.com?subject=The%20Subject&body=The%20Body) to open your Mail client.
+
+### It does not behave correctly with Local or Web E-Mail Clients. Why?
+Checkout the Options of the extension. There you can configure if your Mail client is a Web or Local E-Mail Client which may help.
+Also you can define Texts that are to be shown in the E-Mail content by default.
 
 ### It still does not do what I expect. What can I do?
 On the chrome extensions page (chrome://extensions/) you can enable the developer mode and open the background page.
