@@ -79,3 +79,10 @@ Also you can define Texts that are to be shown in the E-Mail content by default.
 ### It still does not do what I expect. What can I do?
 On the chrome extensions page (chrome://extensions/) you can enable the developer mode and open the background page.
 It will provide you with logging and debugging capabilities. If you discovered an error please report it here.
+
+# Deployment
+Package the relevant files within the Chrome Extensions menu with activated developer mode.
+
+Where to Deploy updates?
+* Chrome Webstore: https://chrome.google.com/webstore/devconsole/42ade01e-4aee-48ca-b75b-678c7015ca84
+* MS Edge Add-Ons: https://partner.microsoft.com/en-us/dashboard/microsoftedge/79e78f47-cba5-4819-b09f-126f78fb5cb9/packages/dashboard
