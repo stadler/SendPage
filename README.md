@@ -32,6 +32,8 @@ Please give this Project a Star on GitHub if you like it.
 Changelog
 ---------
 
+ * 3.1
+   * Add activeTab permission that is needed to access current page title to not write 'undefined' into subject  
  * 3.0
    * Upgrade to manifest version 3
    * Add terms of use
