@@ -19,5 +19,5 @@
   "background": {
     "service_worker": "sendpage.js"
   },
-  "permissions": ["contextMenus", "storage"]
+  "permissions": ["contextMenus", "storage", "activeTab"]
 }
